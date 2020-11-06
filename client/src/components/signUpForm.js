@@ -57,7 +57,7 @@ function SignUpForm() {
     })
       .then((res) => {
         console.log("user created");
-        setRedirect("/");
+        setRedirect("/trips");
       })
       .catch((error) => {
         console.log(error);

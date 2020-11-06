@@ -4,8 +4,8 @@ import { Container } from "react-bootstrap";
 import SignUp from "./pages/signUp";
 import SignIn from "./pages/signIn";
 import API from "./utils/API";
-// import Trips from "./pages/Trips";
-// import Item from "./pages/Item";
+import Trips from "./pages/trips";
+//import Item from "./pages/Item";
 // import NoMatch from "./pages/NoMatch";
 //import NavBar from "./components/NavBar";
 import "./App.css";
@@ -102,7 +102,7 @@ class App extends Component {
               path="/signin"
               render={() => <SignIn updateUser={this.updateUser} />}
             />
-            {/* <Route
+            <Route
               path="/trips"
               render={() => (
                 <Trips
@@ -111,7 +111,7 @@ class App extends Component {
                 />
               )}
             />
-            <Route exact path="/trips/:id">
+            {/* <Route exact path="/trips/:id">
               <Item />
             </Route> */}
             <Route
