@@ -26,10 +26,10 @@ app.use(
   })
 );
 
-// app.use(passport.initialize());
+app.use(passport.initialize());
 
 // Persistent login sessions. Session expires after 6 months or when deleted by user.
-// app.use(passport.session());
+app.use(passport.session());
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
