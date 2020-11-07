@@ -41,7 +41,7 @@ function SignIn(props) {
           // update App.js state
           props.updateUser(response.data);
           // update the state to redirect to home
-          setRedirect("/");
+          setRedirect("/trips");
         }
       })
       .catch((error) => {

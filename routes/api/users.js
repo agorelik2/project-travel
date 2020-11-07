@@ -18,12 +18,12 @@ router
   .delete(userController.remove);
 
 router.post(
-  "/signin",
-  function (req, res, next) {
-    console.log(req.body);
-    console.log("%%%%%%%%%%%%%");
-    next();
-  },
+  "/login",
+  //   function (req, res, next) {
+  //     console.log(req.body);
+  //     console.log("%%%%%%%%%%%%%");
+  //     next();
+  //   },
   passport.authenticate("local"),
   (req, res) => {
     console.log("logged in", req.user);
@@ -32,6 +32,7 @@ router.post(
       firstName: req.user.firstName,
       lastName: req.user.lastName,
     };
+    // req.login();
     res.send(userInfo);
   }
 );

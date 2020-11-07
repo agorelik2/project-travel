@@ -79,7 +79,7 @@ function Trips() {
               disabled={!(formObject.location && formObject.title)}
               onClick={handleFormSubmit}
             >
-              Submit trip
+              Submit Trip
             </FormBtn>
           </form>
         </Col>

@@ -16,8 +16,20 @@ module.exports = {
   },
   create: function (req, res) {
     console.log(req.body);
+    console.log(req);
+
+    //updated create route to save userId for the user who created the trip ALG
     db.Trip.create(req.body)
-      .then((dbTripModel) => res.json(dbTripModel))
+      .then((dbTripModel) => {
+        console.log(dbTripModel);
+        const tripId = dbTripModel._id;
+        const userId = req.user._id;
+        db.User.findOneAndUpdate({ _id: userId }, { $push: { trip: tripId } })
+          .then((dbUserModel) => {
+            res.json(dbUserModel);
+          })
+          .catch((err) => res.status(422).json(err));
+      })
       .catch((err) => res.status(422).json(err));
   },
   update: function (req, res) {
