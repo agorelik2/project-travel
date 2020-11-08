@@ -45,6 +45,7 @@ module.exports = {
   },
   findByUserId: function (req, res) {
     db.Trip.find({ userId: req.params.id })
+      //db.Trip.find({ user: req.user._id })
       .sort({ createdAt: -1 })
       .then((dbTripModel) => res.json(dbTripModel))
       .catch((err) => res.status(422).json(err));

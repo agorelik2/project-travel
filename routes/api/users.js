@@ -7,10 +7,10 @@ const userController = require("../../controllers/userController");
 const tripController = require("../../controllers/tripController");
 const itemController = require("../../controllers/itemController");
 
-// Matches with "/api/books"
+// Matches with "/api/users"
 router.route("/").post(userController.create);
 
-// Matches with "/api/books/:id"
+// Matches with "/api/users/:id"
 router
   .route("/:id")
   .get(userController.findById)
