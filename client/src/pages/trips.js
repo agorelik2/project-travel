@@ -17,12 +17,20 @@ function Trips() {
     loadTrips();
   }, []);
 
-  // Loads all trips and sets them to trips
+  // // Loads all trips and sets them to trips
   function loadTrips() {
     API.getTrips()
       .then((res) => setTrips(res.data))
       .catch((err) => console.log(err));
   }
+
+  // Loads all trips for the user
+  // //ALG populated
+  // function loadTrips() {
+  //   API.getUserTrips()
+  //     .then((res) => setTrips(res.data))
+  //     .catch((err) => console.log(err));
+  // }
 
   // Deletes a trip from the database with a given id, then reloads trips from the db
   function deleteTrip(id) {
@@ -57,7 +65,7 @@ function Trips() {
       <Row>
         <Col size="md-6">
           <Jumbotron>
-            <h1>My Planned Trips</h1>
+            <h1>Create New Trip</h1>
           </Jumbotron>
           <form>
             <Input
@@ -85,7 +93,7 @@ function Trips() {
         </Col>
         <Col size="md-6 sm-12">
           <Jumbotron>
-            <h1>Trips On My List</h1>
+            <h1>View All Trips</h1>
           </Jumbotron>
           {trips.length ? (
             <List>

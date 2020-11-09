@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Api from "../utils/API";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 //SignUp component
 function SignUpForm() {
@@ -156,6 +156,7 @@ function SignUpForm() {
               Sign up
             </button>
             {/* sign in link here */}
+            <Link to={"/signin"}>Sign In Here </Link>
           </div>
         </form>
       </div>

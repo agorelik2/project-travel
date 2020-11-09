@@ -1,22 +1,17 @@
-require("dotenv").config();
-// Requiring necessary npm packages
-var express = require("express");
-var session = require("express-session");
+const express = require("express");
+const session = require("express-session");
+const passport = require("./passport");
 const bodyParser = require("body-parser");
-
-// Requiring passport as we've configured it
-var passport = require("./passport");
-
 const MongoStore = require("connect-mongo")(session);
-const path = require("path");
 
-// console.log(`my envs ${process.env.Example_MONGODB_URI}`);
 const mongoose = require("mongoose");
 const routes = require("./routes");
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// We need to use sessions to keep track of our user's login status
+require("dotenv").config();
+
+// express sessions
 app.use(
   session({
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
@@ -26,10 +21,15 @@ app.use(
   })
 );
 
-app.use(passport.initialize());
+app.use((req, res, next) => {
+  console.log("req.session", "=============");
+  console.log("req.session", req.session);
+  return next();
+});
 
-// Persistent login sessions. Session expires after 6 months or when deleted by user.
-app.use(passport.session());
+// passport
+app.use(passport.initialize()); // initializes the passport
+app.use(passport.session()); // calls serializeUser and deserializeUser
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
@@ -50,7 +50,11 @@ if (process.env.NODE_ENV === "production") {
 app.use(routes);
 
 // Connect to the Mongo DB
+
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/utravel");
+//connection 2
+
+// Connect to the Mongo DB
 
 // Start the API server
 app.listen(PORT, function () {

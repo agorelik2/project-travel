@@ -15,13 +15,13 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
   create: function (req, res) {
-    console.log(req.body);
-    console.log(req);
+    //console.log(req.body);
+    //console.log(req);
 
     //updated create route to save userId for the user who created the trip ALG
     db.Trip.create(req.body)
       .then((dbTripModel) => {
-        console.log(dbTripModel);
+        //  console.log(dbTripModel);
         const tripId = dbTripModel._id;
         const userId = req.user._id;
         db.User.findOneAndUpdate({ _id: userId }, { $push: { trip: tripId } })
@@ -44,10 +44,32 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
   findByUserId: function (req, res) {
+    //console.log(req);
     db.Trip.find({ userId: req.params.id })
       //db.Trip.find({ user: req.user._id })
       .sort({ createdAt: -1 })
       .then((dbTripModel) => res.json(dbTripModel))
       .catch((err) => res.status(422).json(err));
   },
+
+  //ALG Populate
+  // getUserTrips: function (req, res) {
+  //   console.log("User Id:");
+  //   console.log(req.user._id);
+  //   db.User
+  //     .find({
+  //       // _id: req.session.passport.user,
+  //       _id: req.user._id,
+  //     })
+  //     .populate({
+  //       path: "trip",
+  //       populate: { path: "trip" },
+  //     })
+  //     .then(function (db.Trip) {
+  //       res.send(db.Trip);
+  //     })
+  //     .catch(function (err) {
+  //       return err;
+  //     });
+  // },
 };

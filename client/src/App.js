@@ -15,7 +15,7 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      loggedIn: false,
+      isloggedIn: false,
       email: "",
       id: "",
       firstName: "",
@@ -45,7 +45,7 @@ class App extends Component {
       if (response.data.user) {
         console.log("Get User: There is a user saved in the server session: ");
         this.setState({
-          loggedIn: true,
+          isloggedIn: true,
           email: response.data.user.email,
           id: response.data.user._id,
           firstName: response.data.user.firstName,
@@ -54,7 +54,7 @@ class App extends Component {
       } else {
         console.log("Get user: no user");
         this.setState({
-          loggedIn: false,
+          isloggedIn: false,
           email: "",
           firstName: "",
           lastName: "",
@@ -89,19 +89,20 @@ class App extends Component {
             <Route
               exact
               path="/signup"
-              render={(props) => <SignUp {...props} login={this.logIn} />}
+              render={(props) => <SignUp {...props} logIn={this.logIn} />}
             />
             <Route
               exact
               path="/"
-              // render={() => <SignIn updateUser={this.updateUser} />}
-              render={(props) => <SignUp {...props} login={this.logIn} />}
+              render={() => <SignIn updateUser={this.updateUser} />}
+              //render={(props) => <SignUp {...props} logIn={this.logIn} />}
             />
             <Route
               exact
               path="/signin"
               render={() => <SignIn updateUser={this.updateUser} />}
             />
+
             <Route
               path="/trips"
               render={() => (
@@ -111,6 +112,16 @@ class App extends Component {
                 />
               )}
             />
+            {/* <Route
+              path="/trips/populated"
+              render={() => (
+                <Trips
+                  email={this.state.email}
+                  isloggedIn={this.state.isloggedIn}
+                />
+              )}
+            /> */}
+
             {/* <Route exact path="/trips/:id">
               <Item />
             </Route> */}

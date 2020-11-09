@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
+
+import { Link, Redirect } from "react-router-dom";
 import API from "../utils/API";
 
 //Signin component
@@ -103,6 +104,7 @@ function SignIn(props) {
               Sign In
             </button>
             {/* sign up link here */}
+            <Link to={"/signup"}>Sign Up Here </Link>
           </div>
         </form>
       </div>

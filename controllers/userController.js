@@ -10,6 +10,7 @@ module.exports = {
   },
   findById: function (req, res) {
     db.User.findById(req.params.id)
+      // .populate("trip") //AG updated user controller
       .then((dbUserModel) => res.json(dbUserModel))
       .catch((err) => res.status(422).json(err));
   },

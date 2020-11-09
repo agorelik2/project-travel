@@ -1,6 +1,13 @@
 import axios from "axios";
 
 export default {
+  // getUserTrips: function () {
+  //   return axios.get("/api/trips/populated"); //ALG Populated
+  // },
+
+  // getUserTrips: function () {
+  //   return axios.get("/api/trips"); //ALG Populated
+  // },
   deleteTrip: function (id) {
     return axios.delete(`/api/trips/${id}`);
   },
