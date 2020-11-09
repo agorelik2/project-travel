@@ -114,13 +114,14 @@ class App extends Component {
                 />
               )}
             />
+            <Route exact path="/trips/user">
+              <UserTrips />
+            </Route>
+
             <Route exact path="/trips/:id">
               <Detail />
             </Route>
 
-            <Route exact path="/trips/user">
-              <UserTrips />
-            </Route>
             {/* <Route
               path="/trips/user"
               render={() => (
