@@ -104,6 +104,7 @@ class App extends Component {
             />
 
             <Route
+              exact
               path="/trips"
               render={() => (
                 <Trips
