@@ -53,6 +53,22 @@ module.exports = {
   },
 
   //ALG Populate
+  getUserTrips: function (req, res) {
+    console.log("User Id:");
+    console.log(req.user._id);
+    db.User.find({
+      // _id: req.session.passport.user,
+      _id: req.user._id,
+    })
+      .populate("trip")
+      .then(function (dbTripModel) {
+        res.send(dbTripModel);
+      })
+      .catch(function (err) {
+        return err;
+      });
+  },
+  //ALG Populate
   // getUserTrips: function (req, res) {
   //   console.log("User Id:");
   //   console.log(req.user._id);
@@ -62,11 +78,12 @@ module.exports = {
   //       _id: req.user._id,
   //     })
   //     .populate({
+
   //       path: "trip",
   //       populate: { path: "trip" },
   //     })
-  //     .then(function (db.Trip) {
-  //       res.send(db.Trip);
+  //     .then(function (dbTripModel) {
+  //       res.send(dbTripModel);
   //     })
   //     .catch(function (err) {
   //       return err;

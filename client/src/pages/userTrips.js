@@ -7,19 +7,19 @@ import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, TextArea, FormBtn } from "../components/Form";
 
-function Trips() {
+function UserTrips() {
   // Setting our component's initial state
   const [trips, setTrips] = useState([]);
   const [formObject, setFormObject] = useState({});
 
   // Load all trips and store them with setTrips
   useEffect(() => {
-    loadTrips();
+    loadUserTrips();
   }, []);
 
   // // Loads all trips and sets them to trips
-  function loadTrips() {
-    API.getTrips()
+  function loadUserTrips() {
+    API.getUserTrips()
       .then((res) => setTrips(res.data))
       .catch((err) => console.log(err));
   }
@@ -35,7 +35,7 @@ function Trips() {
   // Deletes a trip from the database with a given id, then reloads trips from the db
   function deleteTrip(id) {
     API.deleteTrip(id)
-      .then((res) => loadTrips())
+      .then((res) => loadUserTrips())
       .catch((err) => console.log(err));
   }
 
@@ -55,7 +55,7 @@ function Trips() {
         location: formObject.location,
         description: formObject.description,
       })
-        .then((res) => loadTrips())
+        .then((res) => loadUserTrips())
         .catch((err) => console.log(err));
     }
   }
@@ -93,10 +93,7 @@ function Trips() {
         </Col>
         <Col size="md-6 sm-12">
           <Jumbotron>
-            <h1>View All Trips</h1>
-            <Link to={"/trips/user"}>
-              <strong>View Your Trips</strong>
-            </Link>
+            <h1>View All Your Trips</h1>
           </Jumbotron>
           {trips.length ? (
             <List>
@@ -120,4 +117,4 @@ function Trips() {
   );
 }
 
-export default Trips;
+export default UserTrips;

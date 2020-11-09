@@ -1,9 +1,9 @@
 import axios from "axios";
 
 export default {
-  // getUserTrips: function () {
-  //   return axios.get("/api/trips/populated"); //ALG Populated
-  // },
+  getUserTrips: function () {
+    return axios.get("/api/trips/user"); //ALG User
+  },
 
   // getUserTrips: function () {
   //   return axios.get("/api/trips"); //ALG Populated

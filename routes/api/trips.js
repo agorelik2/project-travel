@@ -18,14 +18,14 @@ router
   .put(tripController.update)
   .delete(tripController.remove);
 
-//ALG Populated
-// router.get("/populated", function (req, res) {
-//   if (req.isAuthenticated()) {
-//     tripController.getUserTrips(req, res);
-//   } else {
-//     res.status(401).send("Not authenticated");
-//   }
-// });
+//ALG /user (populate)
+router.get("/user", function (req, res) {
+  if (req.isAuthenticated()) {
+    tripController.getUserTrips(req, res);
+  } else {
+    res.status(401).send("Not authenticated");
+  }
+});
 
 // router.get("/", function (req, res) {
 //   if (req.isAuthenticated()) {

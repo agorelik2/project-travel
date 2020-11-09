@@ -5,6 +5,7 @@ import SignUp from "./pages/signUp";
 import SignIn from "./pages/signIn";
 import API from "./utils/API";
 import Trips from "./pages/trips";
+import UserTrips from "./pages/userTrips";
 import Detail from "./pages/detail";
 // import NoMatch from "./pages/NoMatch";
 //import NavBar from "./components/NavBar";
@@ -116,8 +117,12 @@ class App extends Component {
             <Route exact path="/trips/:id">
               <Detail />
             </Route>
+
+            <Route exact path="/trips/user">
+              <UserTrips />
+            </Route>
             {/* <Route
-              path="/trips/populated"
+              path="/trips/user"
               render={() => (
                 <Trips
                   email={this.state.email}
