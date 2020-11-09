@@ -5,7 +5,7 @@ import SignUp from "./pages/signUp";
 import SignIn from "./pages/signIn";
 import API from "./utils/API";
 import Trips from "./pages/trips";
-//import Item from "./pages/Item";
+import Detail from "./pages/detail";
 // import NoMatch from "./pages/NoMatch";
 //import NavBar from "./components/NavBar";
 import "./App.css";
@@ -112,6 +112,9 @@ class App extends Component {
                 />
               )}
             />
+            <Route exact path="/trips/:id">
+              <Detail />
+            </Route>
             {/* <Route
               path="/trips/populated"
               render={() => (
