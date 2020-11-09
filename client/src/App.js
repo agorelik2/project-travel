@@ -115,7 +115,10 @@ class App extends Component {
               )}
             />
             <Route exact path="/trips/user">
-              <UserTrips />
+              <UserTrips
+                email={this.state.email}
+                isloggedIn={this.state.isloggedIn}
+              />
             </Route>
 
             <Route exact path="/trips/:id">

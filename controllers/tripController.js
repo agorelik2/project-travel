@@ -55,10 +55,13 @@ module.exports = {
   //ALG Populate
   getUserTrips: function (req, res) {
     console.log("User Id:");
+    console.log("////////////////");
     console.log(req.user._id);
-    db.User.find({
-      // _id: req.session.passport.user,
+    console.log(req.session.passport.user);
+    db.User.findById({
+      //_id: req.session.passport.user,
       _id: req.user._id,
+      //email: email,
     })
       .populate("trip")
       .then(function (dbTripModel) {
