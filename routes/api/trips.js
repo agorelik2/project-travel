@@ -12,6 +12,13 @@ router.route("/").post(tripController.create).get(tripController.findAll);
 //   .delete(tripController.remove);
 
 // Matches with "/api/trips/:id"
+
+router
+  .route("/user")
+  .get(tripController.getUserTrips)
+  .put(tripController.update)
+  .delete(tripController.remove);
+
 router
   .route("/:id")
   .get(tripController.findById)
@@ -19,13 +26,13 @@ router
   .delete(tripController.remove);
 
 //ALG /user (populate)
-router.get("/user", function (req, res) {
-  if (req.isAuthenticated()) {
-    tripController.getUserTrips(req, res);
-  } else {
-    res.status(401).send("Not authenticated");
-  }
-});
+// router.get("/user", function (req, res) {
+//   if (req.isAuthenticated()) {
+//     tripController.getUserTrips(req, res);
+//   } else {
+//     res.status(401).send("Not authenticated");
+//   }
+//});
 
 // router.get("/", function (req, res) {
 //   if (req.isAuthenticated()) {

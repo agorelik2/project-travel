@@ -53,43 +53,63 @@ module.exports = {
   },
 
   //ALG Populate
-  getUserTrips: function (req, res) {
-    console.log("User Id:");
-    console.log("////////////////");
-    console.log(req.user._id);
-    console.log(req.session.passport.user);
-    db.User.findById({
-      //_id: req.session.passport.user,
-      _id: req.user._id,
-      //email: email,
-    })
-      .populate("trip")
-      .then(function (dbTripModel) {
-        res.send(dbTripModel);
-      })
-      .catch(function (err) {
-        return err;
-      });
-  },
-  //ALG Populate
   // getUserTrips: function (req, res) {
   //   console.log("User Id:");
+  //   console.log("////////////////");
   //   console.log(req.user._id);
-  //   db.User
-  //     .find({
-  //       // _id: req.session.passport.user,
-  //       _id: req.user._id,
-  //     })
-  //     .populate({
+  //   console.log(req.session.passport.user);
+  //   db.User.find({
+  //     // _id: req.session.passport.user,
+  //     _id: req.user._id,
+  //   })
+  //     .populate("trips")
 
-  //       path: "trip",
-  //       populate: { path: "trip" },
-  //     })
+  //     // .sort({ createdAt: -1 })
   //     .then(function (dbTripModel) {
-  //       res.send(dbTripModel);
+  //       console.log("~~~~~~~~~~~~~~~~~~~");
+  //       console.log(dbTripModel);
+  //       console.log("~~~~~~~~~~~~~~~~~~~");
+  //       //res.send(dbTripModel);
+  //       res.json(dbTripModel);
   //     })
   //     .catch(function (err) {
   //       return err;
   //     });
   // },
+
+  //ALG Populate
+  getUserTrips: function (req, res) {
+    console.log("User Id:");
+    console.log("////////////////");
+    console.log(req.user._id);
+    console.log(req.session.passport.user);
+    db.User.find({
+      // _id: req.session.passport.user,
+      _id: req.user._id,
+    })
+      .populate("trips")
+
+      // .sort({ createdAt: -1 })
+      .exec(function (err, users) {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("################");
+          console.log("Populated User: " + users);
+          res.send(users);
+        }
+
+        //   console.log("~~~~~~~~~~~~~~~~~~~");
+        //   console.log(dbTripModel);
+        //   console.log("~~~~~~~~~~~~~~~~~~~");
+        //   //res.send(dbTripModel);
+        //   res.json(dbTripModel);
+        // })
+        // .catch(function (err) {
+        //   return err;
+        // });
+      });
+  },
+
+  //.then((dbTripModel) => res.json(dbTripModel))
 };

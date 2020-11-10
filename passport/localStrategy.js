@@ -6,9 +6,10 @@ const strategy = new LocalStrategy(
     usernameField: "email", // not necessary, DEFAULT
   },
   function (email, password, done) {
-    console.log("LOCAL STRATEGY!!!!!!");
+    //console.log("LOCAL STRATEGY!!!!!!");
     User.findOne({ email: email }, (err, user) => {
       if (err) {
+        console.log(err);
         return done(err);
       }
       if (!user) {

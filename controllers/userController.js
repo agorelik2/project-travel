@@ -25,7 +25,7 @@ module.exports = {
           error: `Sorry, already a user with the email: ${email}`,
         });
       } else {
-        console.log(req.body);
+        // console.log(req.body);
         db.User.create(req.body)
           .then((dbUserModel) => res.json(dbUserModel))
           .catch((err) => res.status(422).json(err));

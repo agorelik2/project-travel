@@ -19,8 +19,14 @@ function UserTrips() {
 
   // // Loads all trips and sets them to trips
   function loadUserTrips() {
+    console.log("loading user trips");
     API.getUserTrips()
-      .then((res) => setTrips(res.data))
+      .then((res) => {
+        console.log("////////////");
+        console.log(res);
+
+        return setTrips(res.data);
+      })
       .catch((err) => console.log(err));
   }
 
