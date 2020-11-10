@@ -7,7 +7,7 @@ import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, TextArea, FormBtn } from "../components/Form";
 
-function UserTrips() {
+function UserTrips(props) {
   // Setting our component's initial state
   const [trips, setTrips] = useState([]);
   const [formObject, setFormObject] = useState({});
@@ -17,7 +17,7 @@ function UserTrips() {
     loadUserTrips();
   }, []);
 
-  // // Loads all trips and sets them to trips
+  // Loads all trips for the user, user populated with trips
   function loadUserTrips() {
     console.log("loading user trips");
     API.getUserTrips()
@@ -29,14 +29,6 @@ function UserTrips() {
       })
       .catch((err) => console.log(err));
   }
-
-  // Loads all trips for the user
-  // //ALG populated
-  // function loadTrips() {
-  //   API.getUserTrips()
-  //     .then((res) => setTrips(res.data))
-  //     .catch((err) => console.log(err));
-  // }
 
   // Deletes a trip from the database with a given id, then reloads trips from the db
   function deleteTrip(id) {
@@ -56,6 +48,7 @@ function UserTrips() {
   function handleFormSubmit(event) {
     event.preventDefault();
     if (formObject.title && formObject.location) {
+      //Change from save to update !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
       API.saveTrip({
         title: formObject.title,
         location: formObject.location,
@@ -71,7 +64,7 @@ function UserTrips() {
       <Row>
         <Col size="md-6">
           <Jumbotron>
-            <h1>Create New Trip</h1>
+            <h1>Update Your Trip</h1>
           </Jumbotron>
           <form>
             <Input
@@ -93,7 +86,7 @@ function UserTrips() {
               disabled={!(formObject.location && formObject.title)}
               onClick={handleFormSubmit}
             >
-              Submit Trip
+              Update Trip
             </FormBtn>
           </form>
         </Col>

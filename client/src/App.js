@@ -111,6 +111,9 @@ class App extends Component {
                 <Trips
                   email={this.state.email}
                   isloggedIn={this.state.isloggedIn}
+                  id={this.state.id}
+                  firstName={this.state.firstName}
+                  lastName={this.state.lastName}
                 />
               )}
             />
@@ -118,6 +121,9 @@ class App extends Component {
               <UserTrips
                 email={this.state.email}
                 isloggedIn={this.state.isloggedIn}
+                id={this.state.id}
+                firstName={this.state.firstName}
+                lastName={this.state.lastName}
               />
             </Route>
 

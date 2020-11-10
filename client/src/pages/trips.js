@@ -7,10 +7,15 @@ import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, TextArea, FormBtn } from "../components/Form";
 
-function Trips() {
+function Trips(props) {
   // Setting our component's initial state
   const [trips, setTrips] = useState([]);
   const [formObject, setFormObject] = useState({});
+
+  console.log("User ID:");
+  console.log(props.id);
+  console.log(props.firstName);
+  console.log(props);
 
   // Load all trips and store them with setTrips
   useEffect(() => {
@@ -54,6 +59,7 @@ function Trips() {
         title: formObject.title,
         location: formObject.location,
         description: formObject.description,
+        user: props.id,
       })
         .then((res) => loadTrips())
         .catch((err) => console.log(err));

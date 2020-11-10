@@ -15,7 +15,9 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
   create: function (req, res) {
-    //console.log(req.body);
+    console.log("++++++++++++++++++++++++");
+    console.log(req.body);
+    console.log("++++++++++++++++++++++++");
     //console.log(req);
 
     //updated create route to save userId for the user who created the trip ALG

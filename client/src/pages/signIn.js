@@ -41,7 +41,7 @@ function SignIn(props) {
         if (response.status === 200) {
           // update App.js state
           props.updateUser(response.data);
-          // update the state to redirect to home
+          // update the state to redirect to trips
           setRedirect("/trips");
         }
       })

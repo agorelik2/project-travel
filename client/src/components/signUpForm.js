@@ -3,8 +3,11 @@ import Api from "../utils/API";
 import { Link, Redirect } from "react-router-dom";
 
 //SignUp component
-function SignUpForm() {
+function SignUpForm(props) {
   // const classes = useStyles();
+
+  console.log("****************** Props from signup ************");
+  console.log(props.firstName);
 
   //Redirect hook
   const [redirect, setRedirect] = useState("");
@@ -66,7 +69,19 @@ function SignUpForm() {
 
   //If redirect is true redirect, or else show signup page
   if (redirect) {
-    return <Redirect to={{ pathname: redirect }} />;
+    return (
+      <Redirect
+        to={{
+          pathname: redirect,
+          // state: {
+          //   firstName: this.state.firstName,
+          //   lastName: this.state.lastName,
+          //   id: this.state.id,
+          //   email: this.state.email,
+          //},
+        }}
+      />
+    );
   } else {
     //show sign-up page
     return (

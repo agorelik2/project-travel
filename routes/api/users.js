@@ -31,6 +31,8 @@ router.post(
       email: req.user.email,
       firstName: req.user.firstName,
       lastName: req.user.lastName,
+      id: req.user._id,
+      isLoggedIn: true,
     };
     // req.login();
     res.send(userInfo);
