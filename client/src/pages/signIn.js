@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 
 import { Link, Redirect } from "react-router-dom";
+
 import API from "../utils/API";
+import { Col, Row, Container } from "../components/Grid";
+import { List, ListItem } from "../components/List";
+import { Input, TextArea, FormBtn } from "../components/Form";
 
 //Signin component
 function SignIn(props) {
@@ -54,60 +58,75 @@ function SignIn(props) {
   if (redirect) {
     return <Redirect to={{ pathname: redirect }} />;
   } else {
-    //show sign-up page
+    //show sign-ip page
     return (
-      <div className="SigninForm">
-        <form className="form-horizontal">
-          <div className="form-group">
-            <div className="col-1 col-ml-auto">
-              <label className="form-label" htmlFor="email">
-                E-mail:
-              </label>
-            </div>
-            <div className="col-3 col-mr-auto">
-              <input
-                className="form-input"
-                type="text"
-                id="email"
-                placeholder="john@abc.com"
-                name="email"
-                value={emailInput}
-                onChange={handleEmailInput}
-              />
-            </div>
-          </div>
-          <div className="form-group">
-            <div className="col-1 col-ml-auto">
-              <label className="form-label" htmlFor="password">
-                Password:
-              </label>
-            </div>
-            <div className="col-3 col-mr-auto">
-              <input
-                className="form-input"
-                placeholder="password"
-                type="password"
-                name="password"
-                value={passwordInput}
-                onChange={handlePasswordInput}
-              />
-            </div>
-          </div>
-
-          <div className="form-group ">
-            <div className="col-7"></div>
-
-            <button
-              className="btn btn-primary col-1 col-mr-auto"
-              onClick={handleSignIn}
+      <Container>
+        <div className="section-content m-5">
+          <h1 className="section-header">
+            Share your memories with{" "}
+            <span
+              className="content-header wow fadeIn "
+              data-wow-delay="0.2s"
+              data-wow-duration="2s"
             >
-              Sign In
-            </button>
-            {/* sign up link here */}
-            <Link to={"/signup"}>Sign Up Here </Link>
+              {" "}
+              UTravel
+            </span>
+          </h1>
+          <h3 className="subt">log in and start sharing</h3>
+        </div>
+        <div className="container w-50 shadow-lg round flex-d ">
+          <div className="row justify-content-center p-5 ">
+            <div className="contact-section col-lg-6 p-0 m-0 ">
+              <form>
+                <div className="form-group">
+                  <label className="form-label" htmlFor="email">
+                    Email:
+                  </label>
+                  <input
+                    className="form-control"
+                    value={emailInput}
+                    name="email"
+                    id="email"
+                    onChange={handleEmailInput}
+                    type="text"
+                    placeholder="john@abc.com"
+                  />
+                  {/* <p style={{ color: "red", fontSize: "20px" }}>
+            {this.state.errorUsername}
+          </p> */}
+                </div>
+                <div className="form-group">
+                  <label className="form-label" htmlFor="password">
+                    Password
+                  </label>
+                  <input
+                    className="form-control"
+                    value={passwordInput}
+                    name="password"
+                    onChange={handlePasswordInput}
+                    type="password"
+                    placeholder="Password"
+                  />
+                  {/* <p style={{ color: "red", fontSize: "20px" }}>
+            {this.state.errorPassword}
+          </p> */}
+                </div>
+                <button
+                  type="button"
+                  onClick={handleSignIn}
+                  className="btn btn-primary w-100"
+                >
+                  {" "}
+                  Sign In
+                </button>
+                <br />
+                <Link to={"/signup"}>Sign Up Here </Link>
+              </form>
+            </div>
           </div>
-        </form>
-      </div>
+        </div>
+      </Container>
     );
   }
 }

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import DeleteBtn from "../components/DeleteBtn";
+import UpdateBtn from "../components/UpdateBtn";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import { Link } from "react-router-dom";
@@ -20,13 +21,20 @@ function UserTrips(props) {
   // Loads all trips for the user, user populated with trips
   function loadUserTrips() {
     console.log("loading user trips");
-    API.getUserTrips()
+    API.getTripsByUser()
       .then((res) => {
         console.log("////////////");
         console.log(res);
 
         return setTrips(res.data);
       })
+      .catch((err) => console.log(err));
+  }
+
+  // Updates a trip with a given id, then reloads trips from the db
+  function updateTrip(id) {
+    API.updateTrip(id)
+      .then((res) => loadUserTrips())
       .catch((err) => console.log(err));
   }
 
@@ -92,7 +100,10 @@ function UserTrips(props) {
         </Col>
         <Col size="md-6 sm-12">
           <Jumbotron>
-            <h1>View All Your Trips</h1>
+            <h1>View All {props.firstName}'s Trips </h1>
+            <h3>
+              <Link to="/trips">← Back to All Trips</Link>
+            </h3>
           </Jumbotron>
           {trips.length ? (
             <List>
@@ -103,6 +114,7 @@ function UserTrips(props) {
                       {trip.title} to {trip.location}
                     </strong>
                   </Link>
+                  <UpdateBtn onClick={() => updateTrip(trip._id)} />
                   <DeleteBtn onClick={() => deleteTrip(trip._id)} />
                 </ListItem>
               ))}

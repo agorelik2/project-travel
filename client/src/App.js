@@ -90,7 +90,13 @@ class App extends Component {
             <Route
               exact
               path="/signup"
-              render={(props) => <SignUp {...props} logIn={this.logIn} />}
+              render={(props) => (
+                <SignUp
+                  {...props}
+                  logIn={this.logIn}
+                  updateUser={this.updateUser}
+                />
+              )}
             />
             <Route
               exact
@@ -117,7 +123,7 @@ class App extends Component {
                 />
               )}
             />
-            <Route exact path="/trips/user">
+            <Route exact path="/trips/uid">
               <UserTrips
                 email={this.state.email}
                 isloggedIn={this.state.isloggedIn}

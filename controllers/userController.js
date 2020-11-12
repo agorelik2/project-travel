@@ -1,3 +1,4 @@
+const { User } = require("../models");
 const db = require("../models");
 const passport = require("../passport");
 
@@ -16,7 +17,9 @@ module.exports = {
   },
   create: function (req, res) {
     const email = req.body.email;
-
+    console.log("In USER CONTROLLER, EMAIL");
+    console.log(email);
+    console.log("//////////////////////");
     db.User.findOne({ email: email }, (err, user) => {
       if (err) {
         console.log("User.js post error: ", err);
@@ -25,10 +28,20 @@ module.exports = {
           error: `Sorry, already a user with the email: ${email}`,
         });
       } else {
-        // console.log(req.body);
-        db.User.create(req.body)
+        console.log("REQ.BODY");
+        console.log(req.body);
+        console.log("=============================");
+        // const hashedPassword = generateHash(req.body.password);
+        const newUser = new User({
+          email: req.body.email,
+          password: req.body.password,
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+        });
+        db.User.create(newUser)
           .then((dbUserModel) => res.json(dbUserModel))
-          .catch((err) => res.status(422).json(err));
+          // .catch((err) => res.status(422).json(err));
+          .catch((err) => res.send(err));
       }
     });
   },

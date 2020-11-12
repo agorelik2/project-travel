@@ -15,13 +15,14 @@ function SignUp(props) {
             paddingBottom: "100px",
           }}
         >
-          Sign Up to be able to create trips on UTravel!
+          Welcome to UTravel! Please sign up to share your travel experiences
+          and create new trips!
         </h1>
         <Row>
-          <Col xs={{ span: 12, order: 2 }} md={{ span: 6, order: 1 }}>
+          <Col>
             <SignUpForm {...props} />
           </Col>
-          <Col xs={{ span: 12, order: 1 }} md={{ span: 6, order: 2 }}>
+          {/* <Col xs={{ span: 12, order: 1 }} md={{ span: 6, order: 2 }}>
             <h1
               style={{
                 textAlign: "center",
@@ -31,7 +32,7 @@ function SignUp(props) {
             >
               Sign Up to be able to create trips on UTravel!
             </h1>
-          </Col>
+          </Col> */}
         </Row>
       </Container>
     </>

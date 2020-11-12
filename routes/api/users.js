@@ -7,15 +7,16 @@ const userController = require("../../controllers/userController");
 const tripController = require("../../controllers/tripController");
 const itemController = require("../../controllers/itemController");
 
-// Matches with "/api/users"
-router.route("/").post(userController.create);
-
-// Matches with "/api/users/:id"
-router
-  .route("/:id")
-  .get(userController.findById)
-  .put(userController.update)
-  .delete(userController.remove);
+//router.route("/").post(userController.create);
+router.get("/", (req, res, next) => {
+  console.log("===== user!!======");
+  console.log(req.user);
+  if (req.user) {
+    res.json({ user: req.user });
+  } else {
+    res.json({ user: null });
+  }
+});
 
 router.post(
   "/login",
@@ -32,23 +33,33 @@ router.post(
       firstName: req.user.firstName,
       lastName: req.user.lastName,
       id: req.user._id,
-      isLoggedIn: true,
     };
     // req.login();
     res.send(userInfo);
   }
 );
 
-router.get("/", (req, res, next) => {
-  console.log("===== user!!======");
-  console.log(req.user);
-  if (req.user) {
-    res.json({ user: req.user });
-  } else {
-    res.json({ user: null });
-  }
-});
+//Matches with "user/signup"
+//router.route("/signup").post(userController.create);
+router.post(
+  "/signup",
 
+  userController.create,
+  (req, res) => {
+    console.log("user created", req.user);
+    var userInfo = {
+      email: req.user.email,
+      firstName: req.user.firstName,
+      lastName: req.user.lastName,
+      id: req.user._id,
+    };
+
+    //req.login();
+    res.send(userInfo);
+  }
+);
+
+//Matches with "/api/logout"
 router.post("/logout", (req, res) => {
   if (req.user) {
     req.logout();
@@ -60,30 +71,37 @@ router.post("/logout", (req, res) => {
   }
 });
 
-//Routes for creating a trip
+// Matches with "/api/users/:id"
 router
-  .route("/trips")
-  .post(tripController.create)
-  .get(tripController.findById)
-  .delete(tripController.remove);
+  .route("/:id")
+  .get(userController.findById)
+  .put(userController.update)
+  .delete(userController.remove);
 
-router
-  .route("/trips/:id")
-  .get(tripController.findByUserId)
-  .put(tripController.update)
-  .delete(tripController.remove);
+// //Routes for creating a trip
+// router
+//   .route("/trips")
+//   .post(tripController.create)
+//   .get(tripController.findById)
+//   .delete(tripController.remove);
 
-//routes for items
-router
-  .route("/items")
-  .post(itemController.create)
-  .delete(itemController.remove)
-  .get(itemController.findById);
+// router
+//   .route("/trips/:id")
+//   .get(tripController.findByUserId)
+//   .put(tripController.update)
+//   .delete(tripController.remove);
 
-router
-  .route("/items/:id")
-  .get(itemController.findById)
-  .put(itemController.update)
-  .delete(itemController.remove);
+// //routes for items
+// router
+//   .route("/items")
+//   .post(itemController.create)
+//   .delete(itemController.remove)
+//   .get(itemController.findById);
+
+// router
+//   .route("/items/:id")
+//   .get(itemController.findById)
+//   .put(itemController.update)
+//   .delete(itemController.remove);
 
 module.exports = router;

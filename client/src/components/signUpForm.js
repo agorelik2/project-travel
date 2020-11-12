@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Api from "../utils/API";
 import { Link, Redirect } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 //SignUp component
 function SignUpForm(props) {
@@ -52,36 +53,30 @@ function SignUpForm(props) {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("clicked");
-    Api.saveUser({
+    Api.signup({
       firstName,
       lastName,
       email,
       password,
     })
-      .then((res) => {
-        console.log("user created");
-        setRedirect("/trips");
+      .then((response) => {
+        console.log("signup response: ");
+        console.log(response);
+        if (response.status === 200) {
+          // update App.js state
+          props.updateUser(response.data);
+          // update the state to redirect to trips
+          setRedirect("/trips");
+        }
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
-  //If redirect is true redirect, or else show signup page
+  //If redirect is true redirect, or else show signin page
   if (redirect) {
-    return (
-      <Redirect
-        to={{
-          pathname: redirect,
-          // state: {
-          //   firstName: this.state.firstName,
-          //   lastName: this.state.lastName,
-          //   id: this.state.id,
-          //   email: this.state.email,
-          //},
-        }}
-      />
-    );
+    return <Redirect to={{ pathname: redirect }} />;
   } else {
     //show sign-up page
     return (
@@ -179,4 +174,4 @@ function SignUpForm(props) {
   }
 }
 
-export default SignUpForm;
+export default withRouter(SignUpForm);

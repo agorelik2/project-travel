@@ -1,13 +1,14 @@
 import axios from "axios";
 
 export default {
-  getUserTrips: function () {
-    return axios.get("/api/trips/user"); //ALG User
+  getTripsByUser: function () {
+    return axios.get("/api/trips/uid"); //ALG get trips by UID
   },
 
   // getUserTrips: function () {
-  //   return axios.get("/api/trips"); //ALG Populated
+  //   return axios.get("/api/trips/user"); //ALG User
   // },
+
   deleteTrip: function (id) {
     return axios.delete(`/api/trips/${id}`);
   },
@@ -17,6 +18,11 @@ export default {
   getTrip: function (id) {
     return axios.get(`/api/trips/${id}`);
   },
+
+  updateTrip: function (id) {
+    return axios.put(`/api/trips/${id}`);
+  },
+
   saveTrip: function (tripData) {
     console.log(tripData);
     return axios.post("/api/trips", tripData);
@@ -33,8 +39,8 @@ export default {
     return axios.get("/api/users");
   },
   // Saves a user to the database
-  saveUser: function (userData) {
-    return axios.post("/api/users/", userData);
+  signup: function (userData) {
+    return axios.post("/api/users/signup", userData);
   },
   logout: function () {
     return axios.get("/api/users/logout");

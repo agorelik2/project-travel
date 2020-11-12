@@ -4,21 +4,27 @@ const tripController = require("../../controllers/tripController");
 // Matches with "/api/trips"
 router.route("/").post(tripController.create).get(tripController.findAll);
 
-// Matches with "/api/trips"
 // router
 //   .route("/")
 //   .post(tripController.create)
 //   .get(tripController.findById)
 //   .delete(tripController.remove);
 
-// Matches with "/api/trips/:id"
+//Matches with "/api/trips/uid"
+router
+  .route("/uid")
+  .get(tripController.findByUserId)
+  .put(tripController.update)
+  .delete(tripController.remove);
 
+//Matches with "/api/trips/user"
 router
   .route("/user")
   .get(tripController.getUserTrips)
   .put(tripController.update)
   .delete(tripController.remove);
 
+// Matches with "/api/trips/:id"
 router
   .route("/:id")
   .get(tripController.findById)

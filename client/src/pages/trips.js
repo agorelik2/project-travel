@@ -100,8 +100,8 @@ function Trips(props) {
         <Col size="md-6 sm-12">
           <Jumbotron>
             <h1>View All Trips</h1>
-            <Link to={"/trips/user"}>
-              <strong>View Your Trips</strong>
+            <Link to={"/trips/uid"}>
+              <h3>View {props.firstName}'s Trips </h3>
             </Link>
           </Jumbotron>
           {trips.length ? (
