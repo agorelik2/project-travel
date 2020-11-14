@@ -124,7 +124,7 @@ class App extends Component {
                   id={this.state.id}
                   firstName={this.state.firstName}
                   lastName={this.state.lastName}
-                  logout={this.logout}
+                  logout={this.logOut}
                 />
               )}
             />

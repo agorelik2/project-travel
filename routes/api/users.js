@@ -69,8 +69,8 @@ router.post(
       id: req.user._id,
     };
 
-    // req.login();
-    // res.send(userInfo);
+    req.login();
+    res.send(userInfo);
   }
 );
 

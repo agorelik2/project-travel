@@ -10,12 +10,12 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
   findById: function (req, res) {
-    const id = req.params.id !== "undefined" ? req.params.id : req.user._id;
+    //const id = req.params.id !== "undefined" ? req.params.id : req.user._id;
     // console.log("user id");
     // console.log(typeof id);
     // console.log(req.params.id);
     // console.log(req.user._id);
-    db.User.findById(id)
+    db.User.findById(req.params.id)
       // .populate("trip") //AG updated user controller
       .then((dbUserModel) => {
         // console.log("dbUserModel");
