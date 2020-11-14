@@ -66,11 +66,6 @@ function SignUp(props) {
         if (response.status === 200) {
           // update App.js state
           props.updateUser(response.data);
-          //props.id = response.data._id;
-          console.log(props.id);
-          console.log("~~~~~~~~~~~~~~~)");
-          console.log("response data from SignUp 69");
-          console.log(response.data);
           // update the state to redirect to trips
           setRedirect("/trips");
         }

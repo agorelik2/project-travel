@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, TextArea, FormBtn } from "../components/Form";
+import Nav from "../components/Nav";
 
 function UserTrips(props) {
   // Setting our component's initial state
@@ -70,6 +71,7 @@ function UserTrips(props) {
 
   return (
     <Container fluid>
+      <Nav logOut={props.logOut} />
       <Row>
         <Col size="md-6">
           <Jumbotron>
@@ -80,16 +82,19 @@ function UserTrips(props) {
               onChange={handleInputChange}
               name="title"
               placeholder="Title (required)"
+              value={formObject.title}
             />
             <Input
               onChange={handleInputChange}
               name="location"
               placeholder="Location (required)"
+              value={formObject.location}
             />
             <TextArea
               onChange={handleInputChange}
               name="description"
               placeholder="Description (Optional)"
+              value={formObject.description}
             />
             <FormBtn
               disabled={!(formObject.location && formObject.title)}

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import SignUp from "./pages/signUp";
 import SignIn from "./pages/signIn";
@@ -21,6 +22,7 @@ class App extends Component {
       id: "",
       firstName: "",
       lastName: "",
+      //redirect: "",
     };
     this.logIn = this.logIn.bind(this);
     this.logOut = this.logOut.bind(this);
@@ -35,8 +37,18 @@ class App extends Component {
 
   //Update the user
   updateUser(userObject) {
-    this.setState(userObject);
-    console.log(userObject);
+    let tempuser = {
+      email: userObject.email,
+      firstName: userObject.firstName,
+      lastName: userObject.lastName,
+    };
+    if (userObject._id) {
+      tempuser.id = userObject._id;
+    } else {
+      tempuser.id = userObject.id;
+    }
+    this.setState(tempuser);
+    console.log(tempuser);
   }
 
   logIn = () => {
@@ -68,7 +80,8 @@ class App extends Component {
     });
   };
 
-  logOut = () => {
+  logOut = (e) => {
+    e.preventDefault();
     console.log("logging out");
     API.logout().then((res) => {
       this.setState({
@@ -77,7 +90,14 @@ class App extends Component {
         firstName: "",
         lastName: "",
         id: null,
+        //redirect: "/",
       });
+
+      // console.log("go somewhere else");
+      if (res) {
+        console.log("successfully logged out");
+        //<Redirect to={{ pathname: redirect }} />;
+      }
     });
   };
 
@@ -124,7 +144,7 @@ class App extends Component {
                   id={this.state.id}
                   firstName={this.state.firstName}
                   lastName={this.state.lastName}
-                  logout={this.logOut}
+                  logOut={this.logOut}
                 />
               )}
             />

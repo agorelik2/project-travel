@@ -24,13 +24,15 @@ router.get("/logout", (req, res) => {
   console.log(req.user);
   if (req.user) {
     req.logout();
-    req.session.destroy();
+    //req.session.destroy();
     // res.send({ msg: "logging out" });
     console.log("LOGGED OUT");
+    res.send(true);
     //res.redirect("/");
   } else {
     console.log("NO USER to LOG OUT");
     res.send({ msg: "no user to log out" });
+    //res.redirect("/");
   }
 });
 router.post(

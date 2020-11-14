@@ -16,6 +16,8 @@ function Trips(props) {
   console.log("User ID:");
   console.log(props.id);
   console.log(props.firstName);
+  console.log(props.lastName);
+  console.log(props.email);
   //console.log(props);
 
   // Load all trips and store them with setTrips
@@ -60,7 +62,8 @@ function Trips(props) {
         title: formObject.title,
         location: formObject.location,
         description: formObject.description,
-        user: props.id,
+        user: props.id, ///ALG user is being updated with props.id
+        ///on signup, there is no props.id, so the saveTrip fails
       })
         .then((res) => loadTrips())
         .catch((err) => console.log(err));

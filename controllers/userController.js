@@ -33,7 +33,7 @@ module.exports = {
     const email = req.body.email;
     console.log("In USER CONTROLLER, EMAIL");
     console.log(email);
-    console.log(req);
+    //console.log(req);
     console.log("//////////////////////");
     db.User.findOne({ email: email }, (err, user) => {
       if (err) {
@@ -53,6 +53,8 @@ module.exports = {
           firstName: req.body.firstName,
           lastName: req.body.lastName,
         });
+        //console.log(req.user._id);
+        console.log("==============================");
         db.User.create(newUser)
           .then((dbUserModel) => {
             console.log("log  in");
