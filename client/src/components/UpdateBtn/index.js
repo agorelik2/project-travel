@@ -6,7 +6,7 @@ import "./style.css";
 function UpdateBtn(props) {
   return (
     <span className="delete-btn" {...props} role="button" tabIndex="0">
-      ✗
+      Update
     </span>
   );
 }

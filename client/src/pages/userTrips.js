@@ -33,6 +33,7 @@ function UserTrips(props) {
 
   // Updates a trip with a given id, then reloads trips from the db
   function updateTrip(id) {
+    //LOAD FORM with: the trip title, location and description
     API.updateTrip(id)
       .then((res) => loadUserTrips())
       .catch((err) => console.log(err));
@@ -114,8 +115,8 @@ function UserTrips(props) {
                       {trip.title} to {trip.location}
                     </strong>
                   </Link>
-                  <UpdateBtn onClick={() => updateTrip(trip._id)} />
                   <DeleteBtn onClick={() => deleteTrip(trip._id)} />
+                  <UpdateBtn onClick={() => updateTrip(trip._id)} />
                 </ListItem>
               ))}
             </List>

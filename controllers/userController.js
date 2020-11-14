@@ -10,15 +10,30 @@ module.exports = {
       .catch((err) => res.status(422).json(err));
   },
   findById: function (req, res) {
-    db.User.findById(req.params.id)
+    const id = req.params.id !== "undefined" ? req.params.id : req.user._id;
+    // console.log("user id");
+    // console.log(typeof id);
+    // console.log(req.params.id);
+    // console.log(req.user._id);
+    db.User.findById(id)
       // .populate("trip") //AG updated user controller
-      .then((dbUserModel) => res.json(dbUserModel))
-      .catch((err) => res.status(422).json(err));
+      .then((dbUserModel) => {
+        // console.log("dbUserModel");
+        // console.log(dbUserModel);
+
+        res.json(dbUserModel);
+      })
+      .catch((err) => {
+        // console.log("errrr");
+        // console.log(err);
+        res.status(422).json(err);
+      });
   },
   create: function (req, res) {
     const email = req.body.email;
     console.log("In USER CONTROLLER, EMAIL");
     console.log(email);
+    console.log(req);
     console.log("//////////////////////");
     db.User.findOne({ email: email }, (err, user) => {
       if (err) {
@@ -39,7 +54,12 @@ module.exports = {
           lastName: req.body.lastName,
         });
         db.User.create(newUser)
-          .then((dbUserModel) => res.json(dbUserModel))
+          .then((dbUserModel) => {
+            console.log("log  in");
+            req.login(dbUserModel, function (err) {
+              res.json(dbUserModel);
+            });
+          })
           // .catch((err) => res.status(422).json(err));
           .catch((err) => res.send(err));
       }

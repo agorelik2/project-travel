@@ -18,6 +18,21 @@ router.get("/", (req, res, next) => {
   }
 });
 
+//Matches with "/api/logout"
+router.get("/logout", (req, res) => {
+  console.log("REQ USER");
+  console.log(req.user);
+  if (req.user) {
+    req.logout();
+    req.session.destroy();
+    // res.send({ msg: "logging out" });
+    console.log("LOGGED OUT");
+    //res.redirect("/");
+  } else {
+    console.log("NO USER to LOG OUT");
+    res.send({ msg: "no user to log out" });
+  }
+});
 router.post(
   "/login",
   //   function (req, res, next) {
@@ -54,22 +69,10 @@ router.post(
       id: req.user._id,
     };
 
-    //req.login();
-    res.send(userInfo);
+    // req.login();
+    // res.send(userInfo);
   }
 );
-
-//Matches with "/api/logout"
-router.post("/logout", (req, res) => {
-  if (req.user) {
-    req.logout();
-    req.session.destroy();
-    // res.send({ msg: "logging out" });
-    //res.redirect("/");
-  } else {
-    res.send({ msg: "no user to log out" });
-  }
-});
 
 // Matches with "/api/users/:id"
 router

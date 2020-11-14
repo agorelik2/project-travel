@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
 import { List, ListItem } from "../components/List";
 import { Input, TextArea, FormBtn } from "../components/Form";
+import Nav from "../components/Nav";
 
 function Trips(props) {
   // Setting our component's initial state
@@ -15,7 +16,7 @@ function Trips(props) {
   console.log("User ID:");
   console.log(props.id);
   console.log(props.firstName);
-  console.log(props);
+  //console.log(props);
 
   // Load all trips and store them with setTrips
   useEffect(() => {
@@ -68,6 +69,7 @@ function Trips(props) {
 
   return (
     <Container fluid>
+      <Nav logOut={props.logOut} />
       <Row>
         <Col size="md-6">
           <Jumbotron>

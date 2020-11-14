@@ -40,17 +40,20 @@ class App extends Component {
   }
 
   logIn = () => {
+    console.log("login method");
     return API.getUser().then((response) => {
       console.log("Get user response: ");
       console.log(response.data);
-      if (response.data.user) {
+      if (response.data._id && response.data._id !== "undefined") {
         console.log("Get User: There is a user saved in the server session: ");
+        console.log(response.data_id);
+        console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++=");
         this.setState({
           isloggedIn: true,
-          email: response.data.user.email,
-          id: response.data.user._id,
-          firstName: response.data.user.firstName,
-          lastName: response.data.user.lastName,
+          email: response.data.email,
+          id: response.data._id,
+          firstName: response.data.firstName,
+          lastName: response.data.lastName,
         });
       } else {
         console.log("Get user: no user");
@@ -66,6 +69,7 @@ class App extends Component {
   };
 
   logOut = () => {
+    console.log("logging out");
     API.logout().then((res) => {
       this.setState({
         isLoggedIn: false,
@@ -120,6 +124,7 @@ class App extends Component {
                   id={this.state.id}
                   firstName={this.state.firstName}
                   lastName={this.state.lastName}
+                  logout={this.logout}
                 />
               )}
             />
