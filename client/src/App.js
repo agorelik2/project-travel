@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
 import { Link, Redirect } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import SignUp from "./pages/signUp";
@@ -10,7 +11,10 @@ import UserTrips from "./pages/userTrips";
 import Detail from "./pages/detail";
 // import NoMatch from "./pages/NoMatch";
 //import NavBar from "./components/NavBar";
+
 import "./App.css";
+
+//import { redirect } from "../../passport/localStrategy";
 
 class App extends Component {
   //Constructor for states
@@ -22,10 +26,10 @@ class App extends Component {
       id: "",
       firstName: "",
       lastName: "",
-      //redirect: "",
+      redirect: false,
     };
     this.logIn = this.logIn.bind(this);
-    this.logOut = this.logOut.bind(this);
+    // this.logOut = this.logOut.bind(this);
     this.componentDidMount = this.componentDidMount.bind(this);
     this.updateUser = this.updateUser.bind(this);
   }
@@ -75,41 +79,41 @@ class App extends Component {
           firstName: "",
           lastName: "",
           id: null,
+          redirect: false,
         });
       }
     });
   };
 
-  logOut = (e) => {
-    e.preventDefault();
-    console.log("logging out");
-    API.logout().then((res) => {
-      this.setState({
-        isLoggedIn: false,
-        email: "",
-        firstName: "",
-        lastName: "",
-        id: null,
-        //redirect: "/",
-      });
+  // logOut = (e) => {
+  //   e.preventDefault();
+  //   console.log("logging out");
+  //   API.logout().then((res) => {
+  //     this.setState({
+  //       isLoggedIn: false,
+  //       email: "",
+  //       firstName: "",
+  //       lastName: "",
+  //       id: null,
+  //       redirect: true,
+  //     });
 
-      // console.log("go somewhere else");
-      if (res) {
-        console.log("successfully logged out");
-        //<Redirect to={{ pathname: redirect }} />;
-      }
-    });
-  };
+  //     // console.log("go somewhere else");
+  //     if (res) {
+  //       console.log("successfully logged out");
+  //       //this.props.history.push("/signin");
+  //       //this.context.router.replace("/signin");
+  //     }
+  //   });
+  // };
 
   render() {
+    //if (this.state.redirect) return <Redirect to="/" />;
+    // const { isAuthenticated, user } = this.props.auth;
+    // if (!isAuthenticated) return <Redirect to="/" />;
     return (
       <Router>
         <Container fluid className="p-0">
-          {/* <NavBar
-            logOut={this.logOut}
-            isLoggedIn={this.state.isLoggedIn}
-            email={this.state.email}
-          /> */}
           <Switch>
             <Route
               exact
@@ -133,7 +137,6 @@ class App extends Component {
               path="/signin"
               render={() => <SignIn updateUser={this.updateUser} />}
             />
-
             <Route
               exact
               path="/trips"
@@ -144,7 +147,7 @@ class App extends Component {
                   id={this.state.id}
                   firstName={this.state.firstName}
                   lastName={this.state.lastName}
-                  logOut={this.logOut}
+                  // logOut={this.logOut}
                 />
               )}
             />
@@ -161,20 +164,6 @@ class App extends Component {
             <Route exact path="/trips/:id">
               <Detail />
             </Route>
-
-            {/* <Route
-              path="/trips/user"
-              render={() => (
-                <Trips
-                  email={this.state.email}
-                  isloggedIn={this.state.isloggedIn}
-                />
-              )}
-            /> */}
-
-            {/* <Route exact path="/trips/:id">
-              <Item />
-            </Route> */}
             <Route
               exact
               path="*"
